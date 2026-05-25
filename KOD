@@ -1,0 +1,72 @@
+#include <iostream>
+#include <cmath>
+#include <windows.h>
+
+using namespace std;
+
+class Vector {
+private:
+    double x;
+    double y;
+
+public:
+    Vector() {
+        x = 0.0;
+        y = 0.0;
+    }
+    Vector(double x_val, double y_val) {
+        x = x_val;
+        y = y_val;
+    }
+    void show() const {
+        cout << "(" << x << "; " << y << ")";
+    }
+    double length() const {
+        return sqrt(x * x + y * y);
+    }
+    Vector operator-(const Vector& op2) const {
+        Vector temp;
+        temp.x = this->x - op2.x;
+        temp.y = this->y - op2.y;
+        return temp;
+    }
+    bool operator<(const Vector& op2) const {
+        return this->length() < op2.length();
+    }
+    bool operator>(const Vector& op2) const {
+        return this->length() > op2.length();
+    }
+};
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    Vector v1(5.0, 12.0);
+    Vector v2(3.0, 4.0);
+    cout << "Вектор v1: ";
+    v1.show();
+    cout << ", його довжина = " << v1.length() << endl;
+    cout << "Вектор v2: ";
+    v2.show();
+    cout << ", його довжина = " << v2.length() << endl;
+    cout << " " << endl;
+    Vector v_res = v1 - v2;
+    cout << "Результат вiднiмання (v1 - v2): ";
+    v_res.show();
+    cout << endl << endl;
+    cout << "Перевiрка оператора < :" << endl;
+    if (v1 < v2) {
+        cout << "Вектор v1 менший за вектор v2 за довжиною." << endl;
+    }
+    else {
+        cout << "Вектор v1 НЕ менший за вектор v2 за довжиною." << endl;
+    }
+    cout << endl;
+    cout << "Перевiрка оператора > :" << endl;
+    if (v1 > v2) {
+        cout << "Вектор v1 бiльший за вектор v2 за довжиною." << endl;
+    }
+    else {
+        cout << "Вектор v1 НЕ бiльший за вектор v2 за довжиною." << endl;
+    }
+    return 0;
+}
